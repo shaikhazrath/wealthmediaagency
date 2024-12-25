@@ -1,5 +1,35 @@
 import React from "react";
+import { useEffect, useState } from "react";
+import { Client, Databases } from "appwrite";
 
+const client = new Client();
+client
+  .setEndpoint("https://[YOUR_APPWRITE_ENDPOINT]") // Your Appwrite Endpoint
+  .setProject("[YOUR_PROJECT_ID]"); // Your project ID
+
+const databases = new Databases(client);
+
+const fetchPosters = async () => {
+  try {
+    const response = await databases.listDocuments("[YOUR_DATABASE_ID]", "[YOUR_COLLECTION_ID]");
+    return response.documents;
+  } catch (error) {
+    console.error("Failed to fetch posters:", error);
+    return [];
+  }
+};
+
+const PosterGallery = () => {
+  const [sposters, setPosters] = useState([]);
+
+  useEffect(() => {
+    const getPosters = async () => {
+      const postersData = await fetchPosters();
+      setPosters(postersData);
+    };
+
+    getPosters();
+  }, []);
 const posters = [
   {
     id: 1,
