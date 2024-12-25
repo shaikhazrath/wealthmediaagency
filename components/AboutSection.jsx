@@ -21,13 +21,15 @@ const AboutSection = () => {
             About Us
           </h2>
           <p className="text-lg text-gray-600 mb-4 leading-relaxed">
-            We are passionate about crafting exceptional digital experiences
-            that leave a lasting impression. Whether it’s developing cutting-edge
-            apps or creating stunning designs, our team turns ideas into reality.
+            We specialize in digital marketing with a high reach of many influencers.
+            Our team is dedicated to creating impactful campaigns that connect brands
+            with their target audience through influential voices.
           </p>
           <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-            Innovation is at the heart of what we do. We strive to deliver
-            solutions that not only meet your expectations but exceed them.
+            By leveraging the power of social media and influencer partnerships, we
+            help brands achieve their marketing goals and drive engagement. Our
+            innovative strategies ensure that your message reaches the right people
+            at the right time.
           </p>
           <a className="px-6 py-3 bg-blue-600 text-white text-lg font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition-all">
             Contact Us To Know More
