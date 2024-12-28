@@ -88,7 +88,7 @@ const ContactSection = () => {
         </h2>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 justify-around">
           <div>
-            <img src={loading ? 'loading..':  contact.logo} alt="" srcet="" className=" rounded-md pb-10" />
+            <img src={loading ? 'loading..':   contact?.logo?.split("&mode=admin")[0]} alt="" srcet="" className=" rounded-md pb-10" />
             <div>
               <div className="flex space-x-4 flex-wrap gap-5">
                 {socialmedialinks.map((data) => (
@@ -96,7 +96,7 @@ const ContactSection = () => {
                     href={data.link}
                     className="p-3 bg-blue-100 rounded-full hover:bg-blue-200 transition-colors"
                   >
-                    <img src={data.image} alt="Instagram" className="w-10 h-10" srcSet="" />
+                    <img src={data.image.split("&mode=admin")[0]} alt="Instagram" className="w-10 h-10"  />
                   </a>
                 ))}
               </div>

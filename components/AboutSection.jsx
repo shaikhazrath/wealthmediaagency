@@ -35,10 +35,9 @@ const AboutSection = () => {
         {/* Image Section */}
         <div className="w-full lg:w-1/2">
           <img
-            src={loading ? "Loading..." : aboutData.image} // Replace with the actual image path in your public folder
+            src={loading ? "Loading..." : aboutData.image.split("&mode=admin")[0]} // Replace with the actual image path in your public folder
             alt="About Us"
             className="rounded-lg shadow-lg object-cover w-full h-[400px]"
-            srcSet=""
           />
         </div>
 

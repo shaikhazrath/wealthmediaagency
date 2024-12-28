@@ -33,25 +33,20 @@ const PosterGallery = () => {
 
         {/* Poster Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {posters.map((poster) => (
-            <div
-              key={poster.$id}
-              className="relative group overflow-hidden rounded-lg shadow-lg "
-            >
-              {/* Poster Image */}
-              <img
-                src={poster.image}
-                // alt={poster.alt}
-                className="w-full h-full object-cover"
-                srcSet=""
-              />
-
-              {/* Hover Overlay */}
-
-              {/* Hover Text */}
-            
-            </div>
-          ))}
+          {posters.map((poster) => {
+            const imageUrl = poster.image.split("&mode=admin")[0];
+            return (
+              <div
+                key={poster.$id}
+                className="relative group overflow-hidden rounded-lg shadow-lg "
+              >
+                <img
+                  src={imageUrl}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

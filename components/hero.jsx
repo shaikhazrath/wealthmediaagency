@@ -20,6 +20,7 @@ const Hero = () => {
           "676e519d0001f11391a8", 
           "676e5306000fd3797d20"
         );
+        console.log('helo',response);
         setHeroData(response);
         setLoading(false);
       } catch (error) {
@@ -45,7 +46,7 @@ const Hero = () => {
       <div
         className="absolute top-0 left-0 w-full h-full bg-cover bg-center opacity-40"
         style={{
-          backgroundImage: `url(${backgroundImage})`,
+          backgroundImage: `url(${backgroundImage.split("&mode=admin")[0]})`,
         }}
       ></div>
 

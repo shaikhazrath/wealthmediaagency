@@ -39,7 +39,7 @@ const OurServices = () => {
               className="flex flex-col items-center bg-white p-4 shadow-lg shadow-blue-200 rounded-lg transform group hover:scale-105 hover:shadow-2xl hover:shadow-blue-300 transition duration-300 ease-in-out"
             >
               <div className="mb-4 w-full h-64">
-                <img src={service.Image} alt={service.title} className="w-full h-full object-cover rounded-md" srcSet="" />
+                <img src={service.Image.split("&mode=admin")[0]} alt={service.title} className="w-full h-full object-cover rounded-md"  />
               </div>
               <h3 className="text-xl font-semibold text-gray-800 mb-2">{service.title}</h3>
               <p className="text-gray-600">

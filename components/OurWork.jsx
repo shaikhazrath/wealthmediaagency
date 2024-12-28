@@ -32,24 +32,27 @@ const OurWork = () => {
       </h1>
       
       <div className="flex justify-center flex-wrap gap-10">
-        {videos.map((video, index) => (
-          <div
-            key={index}
-            className="video-container h-[70vh] w-fit overflow-hidden bg-white shadow-md rounded-lg flex justify-center"
-          >
-            <video
-              className="h-full object-cover"
-              style={{ width: "auto" }}
-              controls
-              autoPlay={false}
-              muted
-              loop
+        {videos.map((video, index) => {
+          const videourl = video.video.split("&mode=admin")[0];
+          return (
+            <div
+              key={index}
+              className="video-container h-[70vh] w-fit overflow-hidden bg-white shadow-md rounded-lg flex justify-center"
             >
-              <source src={video.video} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div>
-        ))}
+              <video
+                className="h-full object-cover"
+                style={{ width: "auto" }}
+                controls
+                autoPlay={false}
+                muted
+                loop
+              >
+                <source src={videourl} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
