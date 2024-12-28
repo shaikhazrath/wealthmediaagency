@@ -1,27 +1,38 @@
-import React, { useState } from "react";
+'use client'
+import React, { useState } from 'react';
 
 const Navbar = () => {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const toggleMenu = () => setIsMobile(!isMobile);
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
-    <nav className="bg-blue-800 text-white  w-full top-0 left-0 z-20">
-      <div className="max-w-6xl mx-auto flex justify-between items-center p-4">
-        <div className="text-2xl font-semibold">Wealth Media</div>
-        <ul
-          className={`flex gap-6 ${isMobile ? "flex-col absolute bg-gray-800 top-16 left-0 w-full p-6" : "hidden md:flex"}`}
-        >
-          <li><a href="/" className="hover:text-gray-400">Home</a></li>
-          <li><a href="/services" className="hover:text-gray-400">Services</a></li>
-          <li><a href="/ourwork" className="hover:text-gray-400">Our Work</a></li>
+    <nav className="bg-black p-4">
+      <div className="flex items-center justify-between">
+        <img src="https://cloud.appwrite.io/v1/storage/buckets/676e52730008a728b0e3/files/676f974a002f7faf3ff5/view?project=676fa187002ccfc0d35f&project=676fa187002ccfc0d35f&mode=admin" alt="Brand Logo" className="md:h-32 h-24 w-auto" />
 
-          <li><a href="#about" className="hover:text-gray-400">About</a></li>
-          <li><a href="#contact" className="hover:text-gray-400">Contact</a></li>
-        </ul>
-        <div className="md:hidden cursor-pointer" onClick={toggleMenu}>
-          &#9776;
+
+        <div className='hidden md:flex gap-5 text-xl'>
+        <a href="/" className="block text-white py-2 ">Home</a>
+        <a href="/services" className="block text-white py-2">Services</a>
+        <a href="/ourwork" className="block text-white py-2">Ourwork</a>
+
+        <a href="#about" className="block text-white py-2">About</a>
+        <a href="#contact" className="block text-white py-2">Contact</a>
         </div>
+        <button className="text-white text-4xl md:hidden flex" onClick={toggleMenu}>
+          ☰
+        </button>
+      </div>
+      <div className={`mt-2 md:hidden flex flex-col ${isOpen ? 'block' : 'hidden'} `}>
+        <a href="/" className="block text-white py-2">Home</a>
+        <a href="/services" className="block text-white py-2">Services</a>
+        <a href="/ourwork" className="block text-white py-2">Ourwork</a>
+
+        <a href="#about" className="block text-white py-2">About</a>
+        <a href="#contact" className="block text-white py-2">Contact</a>
       </div>
     </nav>
   );

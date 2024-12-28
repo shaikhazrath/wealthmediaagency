@@ -88,7 +88,7 @@ const ContactSection = () => {
         </h2>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 justify-around">
           <div>
-            <img src={loading ? 'loading..':  contact.logo} alt="" srcset="" className=" rounded-md pb-10" />
+            <img src={loading ? 'loading..':  contact.logo} alt="" srcet="" className=" rounded-md pb-10" />
             <div>
               <div className="flex space-x-4 flex-wrap gap-5">
                 {socialmedialinks.map((data) => (
