@@ -18,8 +18,7 @@ const page = () => {
       <PosterGallery/>
       <OurServices />
       <OurWork />
-      <AboutSection/>
-      <Contact/>
+    
     </div>
   )
 }

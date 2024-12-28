@@ -1,13 +1,28 @@
 "use client";
-
-import React from "react";
-
+import React,{useState,useEffect} from "react";
+import {Client ,Databases} from "appwrite";
 const OurWork = () => {
-  const videos = [
-    "video.mp4", // Assuming video.mp4 is in the 'public/videos' folder
-    "video.mp4",
-    "video.mp4",
-  ];
+  const [videos, setVideos] = useState([]);
+  const client = new Client();
+  const databases = new Databases(client);
+  useEffect(() => {
+    const fetchVideos = async () => {
+      try {
+        client
+          .setEndpoint("https://cloud.appwrite.io/v1")
+          .setProject("676fa187002ccfc0d35f");
+        const response = await databases.listDocuments(
+          "676e5194001bef78b9e5",
+          "676ecbbf000bb8a0f7dd"
+        );
+        console.log(response.documents);
+        setVideos(response.documents);
+      } catch (error) {
+        console.log("Error fetching videos data:", error);
+      }
+    };
+    fetchVideos();
+  }, []);
 
   return (
     <div className="our-work-container bg-gray-100 p-6">
@@ -30,7 +45,7 @@ const OurWork = () => {
               muted
               loop
             >
-              <source src={video} type="video/mp4" />
+              <source src={video.video} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           </div>

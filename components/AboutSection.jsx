@@ -1,17 +1,44 @@
 "use client";
 
 import React from "react";
-
+import { useEffect, useState } from "react";
+import { Client, Databases } from "appwrite";
 const AboutSection = () => {
+  const [aboutData, setAboutData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const client = new Client();
+  const databases = new Databases(client);
+  useEffect(() => {
+    const fetchAboutData = async () => {
+      try {
+        client
+          .setEndpoint("https://cloud.appwrite.io/v1")
+          .setProject("676fa187002ccfc0d35f");
+        const response = await databases.getDocument(
+          "676e5194001bef78b9e5",
+          "676ecd2e00084335befd",
+          "676ed343003438f7d498"
+        );
+
+        setAboutData(response);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching about data:", error);
+      }
+    };
+
+    fetchAboutData();
+  }, []);
   return (
-    <section className="bg-gray-50 py-16">
+    <section className="bg-gray-50 py-16" id="about">
       <div className="container mx-auto px-6 lg:px-16 flex flex-col lg:flex-row items-center gap-12">
         {/* Image Section */}
         <div className="w-full lg:w-1/2">
           <img
-            src="/bg.jpg" // Replace with the actual image path in your public folder
+            src={loading ? "Loading..." : aboutData.image} // Replace with the actual image path in your public folder
             alt="About Us"
             className="rounded-lg shadow-lg object-cover w-full h-[400px]"
+            srcSet=""
           />
         </div>
 
@@ -20,18 +47,13 @@ const AboutSection = () => {
           <h2 className="text-4xl font-extrabold text-gray-800 mb-6">
             About Us
           </h2>
-          <p className="text-lg text-gray-600 mb-4 leading-relaxed">
-            We specialize in digital marketing with a high reach of many influencers.
-            Our team is dedicated to creating impactful campaigns that connect brands
-            with their target audience through influential voices.
+          <p className="text-lg text-gray-600 mb-6">
+            {loading ? "Loading..." : aboutData.description}
           </p>
-          <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-            By leveraging the power of social media and influencer partnerships, we
-            help brands achieve their marketing goals and drive engagement. Our
-            innovative strategies ensure that your message reaches the right people
-            at the right time.
-          </p>
-          <a className="px-6 py-3 bg-blue-600 text-white text-lg font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition-all">
+          <a
+            href="https://wa.me/+918520800787" // Replace 'yourwhatsappnumber' with the actual WhatsApp number
+            className="px-6 py-3 bg-blue-600 text-white text-lg font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition-all"
+          >
             Contact Us To Know More
           </a>
         </div>

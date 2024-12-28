@@ -1,32 +1,43 @@
+
 import React, { useEffect, useState } from "react";
+import { Client, Databases } from "appwrite";
 
 const TestimonialCountMinimal = () => {
   const [counts, setCounts] = useState({
     testimonials: 0,
     creators: 0,
     campaigns: 0,
-  });
-
+  }); 
+   const [loading, setLoading] = useState(true);
+  const client = new Client();
+  const databases = new Databases(client);
   useEffect(() => {
-    const counters = {
-      testimonials: 1500,
-      creators: 200,
-      campaigns: 500,
-    };
-
+    const startCounters = async() => {
+      client
+      .setEndpoint("https://cloud.appwrite.io/v1") 
+      .setProject("676fa187002ccfc0d35f"); 
+      const response = await databases.getDocument(
+        "676e5194001bef78b9e5", 
+        "676e56c10011de10aedf",
+        "676e571200361a51e4e2"
+      );
+      // console.log(response)
+         
     const duration = 2000;
     const increment = 20;
-
-    const startCounters = () => {
+     const testimonials = response.testimonials;
+     const  creators = response.creators;
+     const  campaigns = response.campaigns;
+       setLoading(false);
       const startTime = Date.now();
       const interval = setInterval(() => {
         const elapsedTime = Date.now() - startTime;
         const progress = Math.min(elapsedTime / duration, 1);
 
         setCounts({
-          testimonials: Math.floor(progress * counters.testimonials),
-          creators: Math.floor(progress * counters.creators),
-          campaigns: Math.floor(progress * counters.campaigns),
+          testimonials: Math.floor(progress * testimonials),
+          creators: Math.floor(progress * creators),
+          campaigns: Math.floor(progress * campaigns),
         });
 
         if (progress === 1) clearInterval(interval);
@@ -35,6 +46,8 @@ const TestimonialCountMinimal = () => {
 
     startCounters();
   }, []);
+
+  
 
   return (
     <section className="w-full py-12 bg-blue-100">

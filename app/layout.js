@@ -1,5 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import ContactSection from "@/components/contact";
+import AboutSection from "@/components/AboutSection";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,6 +25,31 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        <AboutSection/>
+        <ContactSection/>
+      <footer className=' text-center bg-blue-50'>
+        <p>&copy; {new Date().getFullYear()} WealthMediaAgency. All rights reserved.</p>
+      </footer>
+        <div
+          style={{
+            position: "fixed",
+            bottom: "20px",
+            right: "20px",
+            zIndex: "1000",
+          }}
+        >
+          <a
+            href="https://wa.me/+918520800787"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="https://tse2.mm.bing.net/th?id=OIP.a6hhCB_mVgUduYj5_TuWHwHaHa&pid=Api&P=0&h=180"
+              alt="WhatsApp"
+              style={{ width: "50px", height: "50px",borderRadius:"50%" }}
+            />
+          </a>
+        </div>
       </body>
     </html>
   );

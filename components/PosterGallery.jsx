@@ -1,69 +1,28 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { Client, Databases } from "appwrite";
-
-const client = new Client();
-client
-  .setEndpoint("https://[YOUR_APPWRITE_ENDPOINT]") // Your Appwrite Endpoint
-  .setProject("[YOUR_PROJECT_ID]"); // Your project ID
-
-const databases = new Databases(client);
-
-const fetchPosters = async () => {
-  try {
-    const response = await databases.listDocuments("[YOUR_DATABASE_ID]", "[YOUR_COLLECTION_ID]");
-    return response.documents;
-  } catch (error) {
-    console.error("Failed to fetch posters:", error);
-    return [];
-  }
-};
-
 const PosterGallery = () => {
-  const [sposters, setPosters] = useState([]);
-
+  const [posters, setPosters] = useState([]);
+  const client = new Client();
+  const databases = new Databases(client);
   useEffect(() => {
-    const getPosters = async () => {
-      const postersData = await fetchPosters();
-      setPosters(postersData);
+    const fetchPosters = async () => {
+      try {
+        client
+          .setEndpoint("https://cloud.appwrite.io/v1")
+          .setProject("676fa187002ccfc0d35f");
+        const response = await databases.listDocuments(
+          "676e5194001bef78b9e5",
+          "676ec839001d85fa426d"
+        );
+        console.log(response.documents);
+        setPosters(response.documents);
+      } catch (error) {
+        console.log("Error fetching posters data:", error);
+      }
     };
-
-    getPosters();
+    fetchPosters();
   }, []);
-const posters = [
-  {
-    id: 1,
-    imageUrl: "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/34a17917926931.562c0f7f02c94.jpg", // Replace with your poster image
-    alt: "Poster 1",
-  },
-  {
-    id: 2,
-    imageUrl: "https://i.pinimg.com/originals/b9/4c/f5/b94cf5b442a2f5798fd39d852067a60a.jpg", // Replace with your poster image
-    alt: "Poster 2",
-  },
-  {
-    id: 3,
-    imageUrl: "https://images.template.net/wp-content/uploads/2017/03/28083438/Product-Marketing-Advertising-Poster.jpg", // Replace with your poster image
-    alt: "Poster 3",
-  },
-  {
-    id: 4,
-    imageUrl: "https://i.pinimg.com/originals/b4/74/35/b4743532bcdb67c6e636fdf0ac2a492a.jpg", // Replace with your poster image
-    alt: "Poster 4",
-  },
-  {
-    id: 5,
-    imageUrl: "https://static.vecteezy.com/system/resources/previews/013/660/410/original/digital-marketing-agency-or-services-flyer-or-poster-template-vector.jpg", // Replace with your poster image
-    alt: "Poster 5",
-  },
-  {
-    id: 6,
-    imageUrl: "https://s3.amazonaws.com/thumbnails.venngage.com/template/d275b40f-3003-4b81-90c2-2943fd0b0c1d.png", // Replace with your poster image
-    alt: "Poster 6",
-  },
-];
-
-const PosterGallery = () => {
   return (
     <section className="w-full py-16 bg-white ">
       <div className="max-w-7xl mx-auto px-4">
@@ -76,14 +35,15 @@ const PosterGallery = () => {
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {posters.map((poster) => (
             <div
-              key={poster.id}
+              key={poster.$id}
               className="relative group overflow-hidden rounded-lg shadow-lg "
             >
               {/* Poster Image */}
               <img
-                src={poster.imageUrl}
-                alt={poster.alt}
+                src={poster.image}
+                // alt={poster.alt}
                 className="w-full h-full object-cover"
+                srcSet=""
               />
 
               {/* Hover Overlay */}
